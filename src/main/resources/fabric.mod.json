@@ -1,38 +1,38 @@
 {
-	"schemaVersion": 1,
-	"id": "verity",
-	"version": "${version}",
-	"name": "Verity",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/verity/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"verity.Verity"
-		],
-		"client": [
-			"verity.client.VerityClient"
-		]
-	},
-	"mixins": [
-		"verity.mixins.json",
-		{
-			"config": "verity.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.19.5",
-		"minecraft": "~26.2",
-		"java": ">=25",
-		"fabric-api": "*"
-	}
+    "schemaVersion": 1,
+    "id": "verity",
+    "version": "${version}",
+    "name": "Verity",
+    "description": "A small passive companion mob driven by a local language model.",
+    "authors": [
+       "YatharthJorwal"
+    ],
+    "contact": {
+       "homepage": "https://github.com/YatharthJorwal/Verity",
+       "sources": "https://github.com/YatharthJorwal/Verity"
+    },
+    "license": "MIT",
+    "icon": "assets/verity/icon.png",
+    "environment": "*",
+    "entrypoints": {
+       "main": [
+          "verity.Verity"
+       ],
+       "client": [
+          "verity.client.VerityClient"
+       ]
+    },
+    "mixins": [
+       "verity.mixins.json",
+       {
+          "config": "verity.client.mixins.json",
+          "environment": "client"
+       }
+    ],
+    "depends": {
+       "fabricloader": ">=0.19.5",
+       "minecraft": "~26.2",
+       "java": ">=25",
+       "fabric-api": "*"
+    }
 }

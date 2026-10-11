@@ -1,9 +1,48 @@
 # Verity
 
-## Setup
+A Fabric mod for Minecraft Java Edition 26.2 that adds **Verity**, a small passive companion mob with a smiley face. Verity is driven by a local language model (via Ollama), so it can notice what you do and react. It speaks rarely, reacts to specific details, and moves when you look away.
 
-For setup instructions, please see the [Fabric Documentation page](https://docs.fabricmc.net/develop/getting-started/creating-a-project#setting-up) related to the IDE that you are using.
+> Status: early development. See [HANDOFF.md](HANDOFF.md) for the current state.
+
+## How it works
+
+- Verity is a normal Minecraft mob. Vanilla pathfinding does all movement.
+- Every few seconds a background thread collects observations (nearby players, time, light, recent chat, what you hold) and sends them to a local Ollama server.
+- The model replies with one JSON action from a fixed set. The mod validates it. Anything invalid falls back to idle.
+- The model never controls movement directly.
+
+## Requirements
+
+- Minecraft Java Edition 26.2
+- Fabric Loader 0.19.5 or newer, and Fabric API for 26.2
+- Java 25
+- Ollama running locally on `localhost:11434` (only for the AI features, which can be toggled off)
+
+## Building from source
+
+Windows:
+
+```
+.\gradlew.bat build
+```
+
+Run a dev client:
+
+```
+.\gradlew.bat runClient
+```
+
+## Project docs
+
+| File | Purpose |
+|---|---|
+| [HANDOFF.md](HANDOFF.md) | Read first. Current state and next steps |
+| [CLAUDE.md](CLAUDE.md) | Instructions for AI assistants working on this repo |
+| [docs/SPEC.md](docs/SPEC.md) | What the mod does, by phase |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Code layout and data flow |
+| [docs/RULES.md](docs/RULES.md) | Coding and workflow rules |
+| [docs/DECISIONS.md](docs/DECISIONS.md) | Decision log |
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+MIT. See [LICENSE](LICENSE).
