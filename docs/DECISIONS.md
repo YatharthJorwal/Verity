@@ -34,3 +34,7 @@ The repo is MIT licensed. The template's CC0 license was replaced, and `fabric.m
 
 ## D-011: Changes ship as merge bundles
 Code changes are delivered as zips laid out like the project root, extracted over the project with overwrite, rather than hand-edited. Accepted.
+
+## D-012: Renderer built on vanilla render state, API names verified from sources
+The renderer uses `MobRenderer<VerityEntity, LivingEntityRenderState, VerityModel>` with no custom render state class until one is needed. Registration uses `EntityRenderers.register` (Fabric's `EntityRendererRegistry` is deprecated in 26.2) and `ModelLayerRegistry`. Names were checked against the FabricMC/fabric `26.2` branch and the FabricMC/fabric-docs `26.1.2` reference code. Vanilla class names themselves are not verified until the user's build passes. Accepted.
+

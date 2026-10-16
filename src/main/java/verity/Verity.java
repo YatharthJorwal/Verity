@@ -23,6 +23,7 @@ public class Verity implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 		ModEntities.init();
+		ModItems.init();
 	}
 
 	public static Identifier id(String path) {

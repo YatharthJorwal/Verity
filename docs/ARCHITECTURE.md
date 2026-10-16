@@ -9,9 +9,9 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 | `verity.Verity` | exists | Mod entrypoint. Holds `MOD_ID`, logger, `id(path)` helper. Calls `ModEntities.init()` |
 | `verity.ModEntities` | exists | Registers the `verity:verity` entity type and its default attributes |
 | `verity.entity.VerityEntity` | exists | The mob. Extends `PathfinderMob` |
-| `verity.client.VerityClient` | exists (empty) | Client entrypoint. Will register the renderer |
-| `verity.client.*` renderer and model | planned | Cube model, smiley texture |
-| `verity.ModItems` (spawn egg) | planned | Item registration |
+| `verity.client.VerityClient` | exists | Client entrypoint. Registers the model layer and the entity renderer |
+| `verity.client.VerityModel`, `VerityModelLayers`, `VerityRenderer` | exists | 8x8x8 cube model (32x16 texture), model layer registration, `MobRenderer` using vanilla `LivingEntityRenderState` |
+| `verity.ModItems` | exists | Registers the spawn egg and adds it to the Spawn Eggs creative tab |
 | `verity.config` | planned | Config file for speed and max HP, later AI toggle |
 | `verity.entity.goal` | planned | Wander, look at player, follow, stand still |
 | `verity.ai` | planned | Observation collector, Ollama HTTP client, prompt builder, JSON parser and action validator, action executor |
