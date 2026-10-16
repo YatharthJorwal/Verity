@@ -8,15 +8,16 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 |---|---|---|
 | `verity.Verity` | exists | Mod entrypoint. Holds `MOD_ID`, logger, `id(path)` helper. Calls `ModEntities.init()` |
 | `verity.ModEntities` | exists | Registers the `verity:verity` entity type and its default attributes |
-| `verity.entity.VerityEntity` | exists | The mob. Extends `PathfinderMob`. Goals so far (vanilla): float, random stroll, look at player, random look around |
+| `verity.entity.VerityEntity` | exists | The mob. Extends `PathfinderMob`. Holds the current `VerityMode`, never despawns, saves its mode. Goal priority: float, stay, follow, stroll, look at player, look around |
+| `verity.entity.VerityMode` | exists | WANDER, FOLLOW, STAY. Goals check it. Later, validated model actions set it |
 | `verity.client.VerityClient` | exists | Client entrypoint. Registers the model layer and the entity renderer |
 | `verity.client.VerityModel`, `VerityModelLayers`, `VerityRenderer` | exists | 8x8x8 cube model (32x16 texture, pivots at its center and follows head pitch and yaw), model layer registration, `MobRenderer` using vanilla `LivingEntityRenderState` |
 | `verity.ModItems` | exists | Registers the spawn egg and adds it to the Spawn Eggs creative tab |
 | `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed) with Gson at startup. Later: AI toggle |
-| `verity.entity.goal` | planned | Custom goals still needed: follow at a distance, stand still. Later: goals driven by validated model actions |
+| `verity.entity.goal` | exists | `ModeStrollGoal`, `StayGoal`, `FollowPlayerGoal`. Later: goals for `walk_to` and `look_at` model actions |
 | `verity.ai` | planned | Observation collector, Ollama HTTP client, prompt builder, JSON parser and action validator, action executor |
 | `verity.memory` | planned | Per-world memory file and summarizer |
-| `verity.command` | planned | Kill switch and debug commands |
+| `verity.command.VerityCommands` | exists | `/verity mode <mode> <targets>`. Later: kill switch and debug commands |
 
 ## Planned data flow (Phase 3)
 

@@ -22,6 +22,12 @@ A Fabric mod for Minecraft Java Edition 26.2 that adds **Verity**, a small passi
 
 On first launch the mod writes `config/verity.json` in the game folder. Current options: `maxHealth` and `movementSpeed`. Restart the game after editing.
 
+## Commands
+
+| Command | Effect |
+|---|---|
+| `/verity mode <wander\|follow\|stay> <targets>` | Sets what Verity is doing. Example: `/verity mode stay @e[type=verity:verity]` |
+
 ## Building from source
 
 Windows:

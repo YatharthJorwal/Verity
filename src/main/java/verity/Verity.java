@@ -7,6 +7,7 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import verity.command.VerityCommands;
 import verity.config.VerityConfig;
 
 public class Verity implements ModInitializer {
@@ -27,6 +28,7 @@ public class Verity implements ModInitializer {
 		VerityConfig.load();
 		ModEntities.init();
 		ModItems.init();
+		VerityCommands.register();
 	}
 
 	public static Identifier id(String path) {

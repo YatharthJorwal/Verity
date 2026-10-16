@@ -2,14 +2,16 @@
 
 Read this first in a new session. Update it whenever it goes stale (see the checklist at the bottom).
 
-**Last updated:** 2026-10-17 (bundle 005: cube follows head pitch and yaw)
+**Last updated:** 2026-10-17 (bundle 006: modes, follow, stay, persistence, /verity mode)
 
 ## Where we are
 
 - Phase 0 (setup) is **done**.
-- Phase 1 (the body) is **done**: entity, entity type, renderer and cube model, textures, spawn egg, config file. The config was verified in game (`maxHealth` change took effect after a restart).
-- Phase 2 (basic behavior) has **started**: Verity wanders slowly, looks at the nearest player within 8 blocks, and glances around, using vanilla goals (bundle 004). User confirmed it wanders and glances around. It did not tilt up at the player because the model ignored head pitch; bundle 005 makes the cube follow head pitch and yaw. Awaiting the user's check of that.
-- Not done in Phase 2: follow at a distance, stand still, persistence (no despawn), death and respawn handling.
+- Phase 1 (the body) is **done** and verified in game, including the cube following head pitch and yaw.
+- Phase 2 (basic behavior) is **mostly done**:
+  - Verified in game: wander slowly, look at the nearest player, glance around.
+  - Bundle 006 adds, awaiting the user's check: `VerityMode` (WANDER, FOLLOW, STAY), `StayGoal`, `FollowPlayerGoal` (starts beyond 5 blocks, stops within 3), a mode-gated stroll goal, no-despawn, mode saved with the entity, and `/verity mode <wander|follow|stay> <targets>`.
+  - Not done: death and respawn handling.
 - Nothing from Phases 3 to 5 exists yet.
 
 ## Environment
@@ -21,8 +23,9 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 
 ## Next step
 
-1. User merges bundle 005, builds, summons Verity, stands close, moves above and below it, and reports whether it tilts to face them.
-2. Then the remaining Phase 2 items, one or two per bundle: stand still, follow at a distance, persistence, death and respawn.
+1. User merges bundle 006, builds, and tests: `/verity mode follow @e[type=verity:verity]` (walk away, it should trail at a distance), `stay` (it stops, still turns its head), `wander` (back to normal). Also quit and reload the world to check the mode is kept.
+2. Then decide and build death and respawn handling, the last Phase 2 item.
+3. Then Phase 3, starting with the Ollama client on a background thread, before any model output touches the game.
 
 ## Open questions
 

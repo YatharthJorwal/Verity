@@ -44,3 +44,9 @@ The renderer uses `MobRenderer<VerityEntity, LivingEntityRenderState, VerityMode
 ## D-014: Start Phase 2 with vanilla goals
 Wander and look-at-player use vanilla goals (`RandomStrollGoal`, `LookAtPlayerGoal`, `RandomLookAroundGoal`, plus `FloatGoal`) registered in `VerityEntity.registerGoals()`. Wander uses a 0.6 speed multiplier so Verity moves slowly. Custom goals are written only for behavior vanilla lacks (follow at a distance, stand still, and later the model-driven actions). Priority order: float, wander, look at player, look around. Provisional.
 
+## D-015: Behavior is driven by a mode, not by goals deciding alone
+`VerityEntity` holds a `VerityMode` (WANDER, FOLLOW, STAY). Each custom goal runs only in its own mode. This gives Phase 3 a single narrow thing to set: a validated model action like `follow` or `stay` just changes the mode, and vanilla goals and pathfinding do the rest. `/verity mode <mode> <targets>` sets it by hand for testing. The mode is saved with the entity. Provisional.
+
+## D-016: Persistence by overriding removeWhenFarAway
+Verity never despawns when players are far away (`removeWhenFarAway` returns false). Death and respawn handling is still open and is its own step. Provisional.
+
