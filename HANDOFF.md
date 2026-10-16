@@ -2,7 +2,7 @@
 
 Read this first in a new session. Update it whenever it goes stale (see the checklist at the bottom).
 
-**Last updated:** 2026-10-17 (bundle 006: modes, follow, stay, persistence, /verity mode)
+**Last updated:** 2026-10-17 (bundle 007: wander fix, /verity status)
 
 ## Where we are
 
@@ -11,7 +11,8 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 - Phase 2 (basic behavior) is **mostly done**:
   - Verified in game: wander slowly, look at the nearest player, glance around.
   - Bundle 006 adds, awaiting the user's check: `VerityMode` (WANDER, FOLLOW, STAY), `StayGoal`, `FollowPlayerGoal` (starts beyond 5 blocks, stops within 3), a mode-gated stroll goal, no-despawn, mode saved with the entity, and `/verity mode <wander|follow|stay> <targets>`.
-  - Not done: death and respawn handling.
+  - Bundle 006 result: stay and follow worked, wander did not. Bundle 007 replaces the wander goal with a self-contained one and adds `/verity status`. Awaiting the user's check.
+  - Not done: death behavior. The user wants: when Verity dies it triggers events that try to kill the player (fire, lightning, random effects, etc.). Design details to confirm: who is targeted, event list, config toggle, respawn.
 - Nothing from Phases 3 to 5 exists yet.
 
 ## Environment
@@ -23,8 +24,8 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 
 ## Next step
 
-1. User merges bundle 006, builds, and tests: `/verity mode follow @e[type=verity:verity]` (walk away, it should trail at a distance), `stay` (it stops, still turns its head), `wander` (back to normal). Also quit and reload the world to check the mode is kept.
-2. Then decide and build death and respawn handling, the last Phase 2 item.
+1. User merges bundle 007, builds, tests wander (`/verity mode wander @e[type=verity:verity]`, then `/verity status @e[type=verity:verity]` if it still does not move).
+2. Agree the death design with the user, then build it as its own bundle.
 3. Then Phase 3, starting with the Ollama client on a background thread, before any model output touches the game.
 
 ## Open questions

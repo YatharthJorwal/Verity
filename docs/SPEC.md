@@ -15,7 +15,8 @@ What Verity does, by phase. Items are checked off in `HANDOFF.md`, not here.
 
 ## Phase 2: Basic behavior (no AI)
 - Goals: wander slowly, look at nearest player, follow at a distance, stand still.
-- Persistent (never despawns). Sensible death and respawn handling.
+- Persistent (never despawns).
+- Death: Max health is meant to be high later. When Verity dies it triggers events aimed at the player that try to kill them, such as setting them on fire, striking them with lightning, or giving them a random effect. Exact event list, targeting, and respawn behavior are still to be designed.
 
 ## Phase 3: The brain
 - Background thread so the game never freezes while the model thinks.

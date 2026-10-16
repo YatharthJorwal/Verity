@@ -27,6 +27,7 @@ On first launch the mod writes `config/verity.json` in the game folder. Current 
 | Command | Effect |
 |---|---|
 | `/verity mode <wander\|follow\|stay> <targets>` | Sets what Verity is doing. Example: `/verity mode stay @e[type=verity:verity]` |
+| `/verity status <targets>` | Shows each Verity's position, mode, and whether it is moving |
 
 ## Building from source
 

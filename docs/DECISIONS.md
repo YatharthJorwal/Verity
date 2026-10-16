@@ -50,3 +50,6 @@ Wander and look-at-player use vanilla goals (`RandomStrollGoal`, `LookAtPlayerGo
 ## D-016: Persistence by overriding removeWhenFarAway
 Verity never despawns when players are far away (`removeWhenFarAway` returns false). Death and respawn handling is still open and is its own step. Provisional.
 
+## D-017: Own wander goal instead of subclassing vanilla's
+After bundle 006, wander stopped working while stay and follow worked. The root cause was not confirmed. `ModeStrollGoal` is now self-contained (random timing, `DefaultRandomPos`, navigation) so it no longer relies on vanilla stroll internals. `/verity status` reports mode and whether Verity is moving, to diagnose this kind of problem. Provisional.
+

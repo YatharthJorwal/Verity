@@ -14,10 +14,10 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 | `verity.client.VerityModel`, `VerityModelLayers`, `VerityRenderer` | exists | 8x8x8 cube model (32x16 texture, pivots at its center and follows head pitch and yaw), model layer registration, `MobRenderer` using vanilla `LivingEntityRenderState` |
 | `verity.ModItems` | exists | Registers the spawn egg and adds it to the Spawn Eggs creative tab |
 | `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed) with Gson at startup. Later: AI toggle |
-| `verity.entity.goal` | exists | `ModeStrollGoal`, `StayGoal`, `FollowPlayerGoal`. Later: goals for `walk_to` and `look_at` model actions |
+| `verity.entity.goal` | exists | `ModeStrollGoal` (own wander logic), `StayGoal`, `FollowPlayerGoal`. Later: goals for `walk_to` and `look_at` model actions |
 | `verity.ai` | planned | Observation collector, Ollama HTTP client, prompt builder, JSON parser and action validator, action executor |
 | `verity.memory` | planned | Per-world memory file and summarizer |
-| `verity.command.VerityCommands` | exists | `/verity mode <mode> <targets>`. Later: kill switch and debug commands |
+| `verity.command.VerityCommands` | exists | `/verity mode <mode> <targets>`, `/verity status <targets>`. Later: kill switch and debug commands |
 
 ## Planned data flow (Phase 3)
 
