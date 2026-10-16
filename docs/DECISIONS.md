@@ -41,3 +41,6 @@ The renderer uses `MobRenderer<VerityEntity, LivingEntityRenderState, VerityMode
 ## D-013: Config is a JSON file read once at startup
 `config/verity.json` in the game directory, read with Gson in `VerityConfig.load()` before anything is registered. Missing file means defaults are written out. Values are clamped to safe ranges. A file that fails to parse is never overwritten, and defaults are used instead. Attributes are registered once, so edits need a game restart. Accepted.
 
+## D-014: Start Phase 2 with vanilla goals
+Wander and look-at-player use vanilla goals (`RandomStrollGoal`, `LookAtPlayerGoal`, `RandomLookAroundGoal`, plus `FloatGoal`) registered in `VerityEntity.registerGoals()`. Wander uses a 0.6 speed multiplier so Verity moves slowly. Custom goals are written only for behavior vanilla lacks (follow at a distance, stand still, and later the model-driven actions). Priority order: float, wander, look at player, look around. Provisional.
+

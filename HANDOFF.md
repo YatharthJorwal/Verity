@@ -2,14 +2,15 @@
 
 Read this first in a new session. Update it whenever it goes stale (see the checklist at the bottom).
 
-**Last updated:** 2026-10-17 (bundle 003: config file)
+**Last updated:** 2026-10-17 (bundle 004: wander and look-at-player goals)
 
 ## Where we are
 
 - Phase 0 (setup) is **done**.
-- Phase 1 (the body) is **code complete**: entity, entity type, renderer and cube model, textures, spawn egg, and a config file (`config/verity.json` with `maxHealth` and `movementSpeed`, read at startup).
-- Not yet confirmed by the user: how Verity looks in game (face on the correct side, size).
-- Nothing from Phases 2 to 5 exists yet.
+- Phase 1 (the body) is **done**: entity, entity type, renderer and cube model, textures, spawn egg, config file. The config was verified in game (`maxHealth` change took effect after a restart).
+- Phase 2 (basic behavior) has **started**: Verity wanders slowly, looks at the nearest player within 8 blocks, and glances around, using vanilla goals (bundle 004). Awaiting the user's in-game check.
+- Not done in Phase 2: follow at a distance, stand still, persistence (no despawn), death and respawn handling.
+- Nothing from Phases 3 to 5 exists yet.
 
 ## Environment
 
@@ -20,7 +21,8 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 
 ## Next step
 
-Phase 2, basic behavior with no AI: goals for wander slowly, look at the nearest player, follow at a distance, and stand still; make the entity persistent (no despawn); sensible death and respawn handling. Do it in small bundles, one or two goals at a time.
+1. User merges bundle 004, builds, summons Verity in a flat creative world, and reports whether it wanders slowly, turns to look at them, and avoids water.
+2. Then the remaining Phase 2 items, one or two per bundle: stand still, follow at a distance, persistence, death and respawn.
 
 ## Open questions
 

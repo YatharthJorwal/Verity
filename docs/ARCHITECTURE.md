@@ -8,12 +8,12 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 |---|---|---|
 | `verity.Verity` | exists | Mod entrypoint. Holds `MOD_ID`, logger, `id(path)` helper. Calls `ModEntities.init()` |
 | `verity.ModEntities` | exists | Registers the `verity:verity` entity type and its default attributes |
-| `verity.entity.VerityEntity` | exists | The mob. Extends `PathfinderMob` |
+| `verity.entity.VerityEntity` | exists | The mob. Extends `PathfinderMob`. Goals so far (vanilla): float, random stroll, look at player, random look around |
 | `verity.client.VerityClient` | exists | Client entrypoint. Registers the model layer and the entity renderer |
 | `verity.client.VerityModel`, `VerityModelLayers`, `VerityRenderer` | exists | 8x8x8 cube model (32x16 texture), model layer registration, `MobRenderer` using vanilla `LivingEntityRenderState` |
 | `verity.ModItems` | exists | Registers the spawn egg and adds it to the Spawn Eggs creative tab |
 | `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed) with Gson at startup. Later: AI toggle |
-| `verity.entity.goal` | planned | Wander, look at player, follow, stand still |
+| `verity.entity.goal` | planned | Custom goals still needed: follow at a distance, stand still. Later: goals driven by validated model actions |
 | `verity.ai` | planned | Observation collector, Ollama HTTP client, prompt builder, JSON parser and action validator, action executor |
 | `verity.memory` | planned | Per-world memory file and summarizer |
 | `verity.command` | planned | Kill switch and debug commands |
