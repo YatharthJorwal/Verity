@@ -12,7 +12,7 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 | `verity.client.VerityClient` | exists | Client entrypoint. Registers the model layer and the entity renderer |
 | `verity.client.VerityModel`, `VerityModelLayers`, `VerityRenderer` | exists | 8x8x8 cube model (32x16 texture), model layer registration, `MobRenderer` using vanilla `LivingEntityRenderState` |
 | `verity.ModItems` | exists | Registers the spawn egg and adds it to the Spawn Eggs creative tab |
-| `verity.config` | planned | Config file for speed and max HP, later AI toggle |
+| `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed) with Gson at startup. Later: AI toggle |
 | `verity.entity.goal` | planned | Wander, look at player, follow, stand still |
 | `verity.ai` | planned | Observation collector, Ollama HTTP client, prompt builder, JSON parser and action validator, action executor |
 | `verity.memory` | planned | Per-world memory file and summarizer |

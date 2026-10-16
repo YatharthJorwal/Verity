@@ -20,7 +20,7 @@ What Verity does, by phase. Items are checked off in `HANDOFF.md`, not here.
 ## Phase 3: The brain
 - Background thread so the game never freezes while the model thinks.
 - Observations every few seconds: nearby players, time of day, light level, recent chat, what the player holds or builds.
-- Send observations plus a personality prompt to Ollama at `localhost:11434`.
+- Send observations plus a personality prompt to Ollama at `localhost:11434`. Model: `hf.co/bartowski/Qwen_Qwen3.5-9B-GGUF:Q6_K_L`.
 - Model replies with JSON using a fixed action set: `walk_to`, `look_at`, `follow`, `stay`, `say`, `vanish`.
 - Every reply is validated. Bad output falls back to idle.
 - Vanilla pathfinding executes actions. The model never controls movement directly.

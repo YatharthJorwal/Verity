@@ -2,14 +2,13 @@
 
 Read this first in a new session. Update it whenever it goes stale (see the checklist at the bottom).
 
-**Last updated:** 2026-10-11 (bundle 002: renderer, model, spawn egg)
+**Last updated:** 2026-10-17 (bundle 003: config file)
 
 ## Where we are
 
 - Phase 0 (setup) is **done**.
-- Phase 1 (the body) is **mostly done**, pending an in-game check of bundle 002:
-  - Done: `VerityEntity` (extends `PathfinderMob`, 10 max health, 0.2 movement speed), `ModEntities` (entity type 0.52 x 0.52 plus attributes), `ModItems` (spawn egg in the Spawn Eggs tab), client model/renderer/model layer (`VerityModel`, `VerityRenderer`, `VerityModelLayers`), cube texture with a smiley, spawn egg texture and item model, `en_us.json` names.
-  - Not done: config file for speed and max HP, a visual check that the face is on the correct side and the entity looks right.
+- Phase 1 (the body) is **code complete**: entity, entity type, renderer and cube model, textures, spawn egg, and a config file (`config/verity.json` with `maxHealth` and `movementSpeed`, read at startup).
+- Not yet confirmed by the user: how Verity looks in game (face on the correct side, size).
 - Nothing from Phases 2 to 5 exists yet.
 
 ## Environment
@@ -17,17 +16,15 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 - Windows, IntelliJ IDEA, Temurin JDK 25, project at `D:\Tools\dev\verity`.
 - Versions: see `gradle.properties` (Minecraft 26.2, Fabric Loader 0.19.x, Loom 1.18.x, Fabric API 0.161.x+26.2 at the time of writing).
 - GitHub: https://github.com/YatharthJorwal/Verity
+- Model for the brain (Phase 3): `hf.co/bartowski/Qwen_Qwen3.5-9B-GGUF:Q6_K_L`
 
 ## Next step
 
-1. User merges bundle 002, runs `.\gradlew.bat build`, then `.\gradlew.bat runClient`, creates a creative world, finds the Verity Spawn Egg in the Spawn Eggs tab (or runs `/summon verity:verity`), and reports what it looks like.
-2. Fix any compile or visual problems found.
-3. Then the config file (speed, max HP), and Phase 2 goals.
+Phase 2, basic behavior with no AI: goals for wander slowly, look at the nearest player, follow at a distance, and stand still; make the entity persistent (no despawn); sensible death and respawn handling. Do it in small bundles, one or two goals at a time.
 
 ## Open questions
 
-- Which Qwen model variant to run on Ollama (size and tag). Not chosen yet.
-- Bundle 002 compiles only if the vanilla 26.2 class names match the 26.1.2 docs reference. Fabric API names were verified against the 26.2 branch. Confirm with the user's build output.
+- Phase 3: confirm Ollama can run the chosen model and that thinking mode can be turned off for it.
 
 ## Gotchas learned so far
 

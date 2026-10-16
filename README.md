@@ -16,7 +16,11 @@ A Fabric mod for Minecraft Java Edition 26.2 that adds **Verity**, a small passi
 - Minecraft Java Edition 26.2
 - Fabric Loader 0.19.5 or newer, and Fabric API for 26.2
 - Java 25
-- Ollama running locally on `localhost:11434` (only for the AI features, which can be toggled off)
+- Ollama running locally on `localhost:11434` (only for the AI features, which can be toggled off), with the model `hf.co/bartowski/Qwen_Qwen3.5-9B-GGUF:Q6_K_L` pulled
+
+## Configuration
+
+On first launch the mod writes `config/verity.json` in the game folder. Current options: `maxHealth` and `movementSpeed`. Restart the game after editing.
 
 ## Building from source
 

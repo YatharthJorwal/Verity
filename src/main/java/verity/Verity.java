@@ -7,6 +7,8 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import verity.config.VerityConfig;
+
 public class Verity implements ModInitializer {
 	public static final String MOD_ID = "verity";
 
@@ -22,6 +24,7 @@ public class Verity implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+		VerityConfig.load();
 		ModEntities.init();
 		ModItems.init();
 	}
