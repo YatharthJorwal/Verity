@@ -37,6 +37,7 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 - No Mods button in the title screen is normal. Vanilla Fabric does not add one. "Minecraft 26.2 (Modded)" in the corner confirms Fabric loaded.
 - A mob with no registered renderer crashes the client when summoned. Bundle 002 adds the renderer.
 - Look-at behavior can be correct in game logic but invisible if the model never applies `state.xRot` and `state.yRot` (degrees, convert to radians for model parts).
+- In 26.2, vanilla entity type constants (`LIGHTNING_BOLT`, `PIG`, `ZOMBIE`, ...) live in `net.minecraft.world.entity.EntityTypes`, not `EntityType`. The 26.1.2 docs repo still shows the old form, so prefer the Fabric API 26.2 branch for names. Positioning uses `snapTo`.
 - Useful sources for API names, reachable from the sandbox: `github.com/FabricMC/fabric` (branch `26.2`) and `github.com/FabricMC/fabric-docs` (`reference/26.1.2`).
 
 ## Update checklist

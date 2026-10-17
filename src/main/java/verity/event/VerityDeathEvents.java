@@ -14,7 +14,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
 
@@ -90,7 +91,11 @@ public final class VerityDeathEvents {
 	}
 
 	private static void lightningStrike(ServerLevel level, ServerPlayer target) {
-		EntityType.LIGHTNING_BOLT.spawn(level, target.blockPosition(), EntitySpawnReason.TRIGGERED);
+		LightningBolt bolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.TRIGGERED);
+		if (bolt != null) {
+			bolt.snapTo(target.position());
+			level.addFreshEntity(bolt);
+		}
 	}
 
 	private static void randomEffect(ServerLevel level, ServerPlayer target) {
