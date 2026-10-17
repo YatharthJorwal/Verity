@@ -2,19 +2,13 @@
 
 Read this first in a new session. Update it whenever it goes stale (see the checklist at the bottom).
 
-**Last updated:** 2026-10-17 (bundle 010: reworked death events)
+**Last updated:** 2026-10-17 (bundle 011: Ollama client, ping, lava 1 second)
 
 ## Where we are
 
-- Phase 0 (setup) is **done**.
-- Phase 1 (the body) is **done** and verified in game, including the cube following head pitch and yaw.
-- Phase 2 (basic behavior) is **mostly done**:
-  - Verified in game: wander slowly, look at the nearest player, glance around.
-  - Bundle 006 adds, awaiting the user's check: `VerityMode` (WANDER, FOLLOW, STAY), `StayGoal`, `FollowPlayerGoal` (starts beyond 5 blocks, stops within 3), a mode-gated stroll goal, no-despawn, mode saved with the entity, and `/verity mode <wander|follow|stay> <targets>`.
-  - Verified in game: stay, follow, wander (after the bundle 007 rewrite of the wander goal), `/verity status`.
-  - Death events (bundle 008) work in game. Bundle 010 reworks them (see D-019): one event per death, uniform among categories, weaker lightning, temporary lava, more effects. Awaiting the user's check.
-  - Not done: nothing planned for Phase 2 beyond testing the death events.
-- Nothing from Phases 3 to 5 exists yet.
+- Phase 0 (setup), Phase 1 (the body) and Phase 2 (basic behavior) are **done and verified in game**: entity, renderer, spawn egg, config, wander/follow/stay modes, persistence, and the death events (one random event per death, see D-019). Lava now lasts 1 second.
+- Phase 3 (the brain) has **started**: bundle 011 adds `OllamaClient` (background thread, non-streaming, thinking off), Ollama settings in the config, and `/verity ping` to test the connection. Nothing from the model touches the game yet. Awaiting the user's check that Ollama is installed, the model is pulled, and `/verity ping` gets an answer.
+- Not started: observations, personality prompt, JSON action parsing and validation, executing actions, memory (Phase 4), polish (Phase 5).
 
 ## Environment
 
@@ -25,12 +19,13 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 
 ## Next step
 
-1. User merges bundle 010, builds, and tests the death events many times in a throwaway world (`/kill @e[type=verity:verity]` targets the nearest player; the log line `Verity death event: <name>` says which event fired). Check that lava disappears after about 3 seconds and that lightning does not kill.
-2. Phase 3, starting with the Ollama client on a background thread, before any model output touches the game. First confirm Ollama can run the chosen model with thinking off.
+1. User installs Ollama, pulls the model, merges bundle 011, and runs `/verity ping` in game. Note how long the first reply takes and whether the text looks clean (no thinking text).
+2. Next bundle: observation snapshot (nearby players, time of day, light level, held item) collected on the server thread and turned into a short text.
+3. Then the action contract: the model replies with JSON from the fixed set (`walk_to`, `look_at`, `follow`, `stay`, `say`, `vanish`), parsed and validated, with idle as the fallback. `follow` and `stay` map onto `VerityMode`.
 
 ## Open questions
 
-- Phase 3: confirm Ollama can run the chosen model and that thinking mode can be turned off for it.
+- Whether `think: false` really suppresses thinking for the chosen model, and typical reply time. Learned from the first `/verity ping`.
 
 ## Gotchas learned so far
 

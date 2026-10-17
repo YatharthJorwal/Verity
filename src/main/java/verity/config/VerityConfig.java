@@ -26,6 +26,12 @@ public class VerityConfig {
 	public double movementSpeed = 0.2;
 	/** When Verity dies, one random event is aimed at a player. */
 	public boolean deathEventsEnabled = true;
+	/** Address of the local Ollama server. */
+	public String ollamaUrl = "http://localhost:11434";
+	/** Model tag as shown by `ollama list`. */
+	public String ollamaModel = "hf.co/bartowski/Qwen_Qwen3.5-9B-GGUF:Q6_K_L";
+	/** How long to wait for one reply. The first request after startup is slow because the model must load. */
+	public int ollamaTimeoutSeconds = 120;
 
 	public static VerityConfig get() {
 		return instance;
@@ -67,5 +73,12 @@ public class VerityConfig {
 	private void sanitize() {
 		maxHealth = Double.isNaN(maxHealth) ? 10.0 : Math.clamp(maxHealth, 1.0, 1000.0);
 		movementSpeed = Double.isNaN(movementSpeed) ? 0.2 : Math.clamp(movementSpeed, 0.05, 1.0);
+		if (ollamaUrl == null || ollamaUrl.isBlank()) {
+			ollamaUrl = "http://localhost:11434";
+		}
+		if (ollamaModel == null || ollamaModel.isBlank()) {
+			ollamaModel = "hf.co/bartowski/Qwen_Qwen3.5-9B-GGUF:Q6_K_L";
+		}
+		ollamaTimeoutSeconds = Math.clamp(ollamaTimeoutSeconds, 5, 600);
 	}
 }

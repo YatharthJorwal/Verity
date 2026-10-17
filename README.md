@@ -20,11 +20,11 @@ A Fabric mod for Minecraft Java Edition 26.2 that adds **Verity**, a small passi
 
 ## Configuration
 
-On first launch the mod writes `config/verity.json` in the game folder. Current options: `maxHealth`, `movementSpeed`, and `deathEventsEnabled` (true or false). Restart the game after editing.
+On first launch the mod writes `config/verity.json` in the game folder. Current options: `maxHealth`, `movementSpeed`, `deathEventsEnabled` (true or false), `ollamaUrl`, `ollamaModel` and `ollamaTimeoutSeconds`. Restart the game after editing.
 
 ## When Verity dies
 
-It does not go quietly. One random event startles and threatens a player: they are set on fire briefly, hit by a weak lightning flash, caught by lava at their feet for a few seconds, or given a random bad potion effect. The killer is targeted, otherwise the nearest player. The aim is to scare, not to kill, so risky events are skipped when the player is low on health. Turn it off with `deathEventsEnabled`.
+It does not go quietly. One random event startles and threatens a player: they are set on fire briefly, hit by a weak lightning flash, caught by lava at their feet for a second, or given a random bad potion effect. The killer is targeted, otherwise the nearest player. The aim is to scare, not to kill, so risky events are skipped when the player is low on health. Turn it off with `deathEventsEnabled`.
 
 ## Commands
 
@@ -32,6 +32,7 @@ It does not go quietly. One random event startles and threatens a player: they a
 |---|---|
 | `/verity mode <wander\|follow\|stay> <targets>` | Sets what Verity is doing. Example: `/verity mode stay @e[type=verity:verity]` |
 | `/verity status <targets>` | Shows each Verity's position, mode, and whether it is moving |
+| `/verity ping` | Sends a test message to Ollama and prints the reply |
 
 ## Building from source
 

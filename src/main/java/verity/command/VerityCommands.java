@@ -8,11 +8,15 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.entity.Entity;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
+import verity.Verity;
+import verity.ai.OllamaClient;
+import verity.config.VerityConfig;
 import verity.entity.VerityEntity;
 import verity.entity.VerityMode;
 
@@ -20,6 +24,7 @@ import verity.entity.VerityMode;
  * Debug and control commands.
  * /verity mode (wander|follow|stay) targets
  * /verity status targets
+ * /verity ping   (sends a test message to Ollama and prints the answer)
  * Example: /verity mode stay @e[type=verity:verity]
  */
 public class VerityCommands {
@@ -39,7 +44,8 @@ public class VerityCommands {
 			dispatcher.register(Commands.literal("verity")
 					.requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_MODERATOR))
 					.then(modeNode)
-					.then(statusNode));
+					.then(statusNode)
+					.then(Commands.literal("ping").executes(VerityCommands::ping)));
 		});
 	}
 
@@ -68,5 +74,30 @@ public class VerityCommands {
 			}
 		}
 		return found;
+	}
+
+	private static int ping(CommandContext<CommandSourceStack> context) {
+		CommandSourceStack source = context.getSource();
+		MinecraftServer server = source.getServer();
+		source.sendSuccess(() -> Component.literal("Asking Ollama (" + VerityConfig.get().ollamaModel + ")..."), false);
+
+		OllamaClient.chat("You are Verity, a tiny smiley cube in Minecraft. Reply with one short sentence.", "Say hello.")
+				.whenComplete((reply, error) -> server.execute(() -> {
+					if (error != null) {
+						Throwable cause = error.getCause() != null ? error.getCause() : error;
+						String detail = cause.getClass().getSimpleName() + (cause.getMessage() != null ? ": " + cause.getMessage() : "");
+						Verity.LOGGER.warn("Ollama ping failed", cause);
+						source.sendFailure(Component.literal("Ollama failed: " + detail));
+					} else {
+						String text = reply.content().replace('\n', ' ');
+						if (text.length() > 300) {
+							text = text.substring(0, 300) + "...";
+						}
+						Verity.LOGGER.info("Ollama replied in {} ms", reply.millis());
+						String shown = text;
+						source.sendSuccess(() -> Component.literal("Ollama replied in " + reply.millis() + " ms: " + shown), false);
+					}
+				}));
+		return 1;
 	}
 }

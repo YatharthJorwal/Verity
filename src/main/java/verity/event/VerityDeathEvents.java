@@ -37,7 +37,7 @@ public final class VerityDeathEvents {
 	private static final float IGNITE_SECONDS = 5.0f;
 
 	private static final float LAVA_MIN_HEALTH = 14.0f;
-	private static final int LAVA_TICKS = 60;
+	private static final int LAVA_TICKS = 20;
 
 	private static final float LIGHTNING_DAMAGE = 4.0f;
 	private static final float LIGHTNING_MIN_REMAINING_HEALTH = 2.0f;
@@ -131,7 +131,7 @@ public final class VerityDeathEvents {
 		return target.getHealth() >= LAVA_MIN_HEALTH && level.getBlockState(target.blockPosition()).isAir();
 	}
 
-	/** Lava appears at the player's feet for a few seconds, then the original block returns. */
+	/** Lava appears at the player's feet for one second, then the original block returns. */
 	private static void lavaAtFeet(ServerLevel level, ServerPlayer target) {
 		TemporaryBlocks.place(level, target.blockPosition(), Blocks.LAVA.defaultBlockState(), LAVA_TICKS);
 	}

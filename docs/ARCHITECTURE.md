@@ -15,11 +15,12 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 | `verity.client.VerityClient` | exists | Client entrypoint. Registers the model layer and the entity renderer |
 | `verity.client.VerityModel`, `VerityModelLayers`, `VerityRenderer` | exists | 8x8x8 cube model (32x16 texture, pivots at its center and follows head pitch and yaw), model layer registration, `MobRenderer` using vanilla `LivingEntityRenderState` |
 | `verity.ModItems` | exists | Registers the spawn egg and adds it to the Spawn Eggs creative tab |
-| `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed, death events on/off) with Gson at startup. Later: AI toggle |
+| `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed, death events on/off, Ollama URL, model and timeout) with Gson at startup. Later: AI toggle |
 | `verity.entity.goal` | exists | `ModeStrollGoal` (own wander logic), `StayGoal`, `FollowPlayerGoal`. Later: goals for `walk_to` and `look_at` model actions |
-| `verity.ai` | planned | Observation collector, Ollama HTTP client, prompt builder, JSON parser and action validator, action executor |
+| `verity.ai.OllamaClient` | exists | Sends chat requests to Ollama on one background thread (`verity-brain`) and returns a `CompletableFuture`. Thinking off, non-streaming |
+| `verity.ai` (rest) | planned | Observation collector, prompt builder, JSON parser and action validator, action executor |
 | `verity.memory` | planned | Per-world memory file and summarizer |
-| `verity.command.VerityCommands` | exists | `/verity mode <mode> <targets>`, `/verity status <targets>`. Later: kill switch and debug commands |
+| `verity.command.VerityCommands` | exists | `/verity mode <mode> <targets>`, `/verity status <targets>`, `/verity ping`. Later: kill switch and debug commands |
 
 ## Planned data flow (Phase 3)
 
