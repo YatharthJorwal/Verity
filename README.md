@@ -20,7 +20,11 @@ A Fabric mod for Minecraft Java Edition 26.2 that adds **Verity**, a small passi
 
 ## Configuration
 
-On first launch the mod writes `config/verity.json` in the game folder. Current options: `maxHealth` and `movementSpeed`. Restart the game after editing.
+On first launch the mod writes `config/verity.json` in the game folder. Current options: `maxHealth`, `movementSpeed`, `deathEventsEnabled` (true or false) and `deathEventCount` (1 to 3). Restart the game after editing.
+
+## When Verity dies
+
+It does not go quietly. When it dies, a couple of random events hit a player: set on fire, struck by lightning, or hit with a bad potion effect. The killer is targeted, otherwise the nearest player. Turn it off with `deathEventsEnabled`.
 
 ## Commands
 

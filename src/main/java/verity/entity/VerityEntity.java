@@ -1,5 +1,7 @@
 package verity.entity;
 
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -17,6 +19,7 @@ import verity.config.VerityConfig;
 import verity.entity.goal.FollowPlayerGoal;
 import verity.entity.goal.ModeStrollGoal;
 import verity.entity.goal.StayGoal;
+import verity.event.VerityDeathEvents;
 
 public class VerityEntity extends PathfinderMob {
 	/** Multiplier on movement speed while wandering. Below 1 means slower than top speed. */
@@ -26,6 +29,7 @@ public class VerityEntity extends PathfinderMob {
 	private static final float LOOK_DISTANCE = 8.0f;
 
 	private VerityMode mode = VerityMode.WANDER;
+	private boolean deathEventsFired;
 
 	public VerityEntity(EntityType<? extends VerityEntity> type, Level level) {
 		super(type, level);
@@ -63,6 +67,15 @@ public class VerityEntity extends PathfinderMob {
 	@Override
 	public boolean removeWhenFarAway(double distanceToClosestPlayer) {
 		return false;
+	}
+
+	@Override
+	public void die(DamageSource source) {
+		super.die(source);
+		if (!this.deathEventsFired && this.level() instanceof ServerLevel serverLevel) {
+			this.deathEventsFired = true;
+			VerityDeathEvents.trigger(serverLevel, this, source);
+		}
 	}
 
 	@Override

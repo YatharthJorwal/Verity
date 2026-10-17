@@ -53,3 +53,6 @@ Verity never despawns when players are far away (`removeWhenFarAway` returns fal
 ## D-017: Own wander goal instead of subclassing vanilla's
 After bundle 006, wander stopped working while stay and follow worked. The root cause was not confirmed. `ModeStrollGoal` is now self-contained (random timing, `DefaultRandomPos`, navigation) so it no longer relies on vanilla stroll internals. `/verity status` reports mode and whether Verity is moving, to diagnose this kind of problem. Provisional.
 
+## D-018: Death events
+When Verity dies, `VerityDeathEvents` picks `deathEventCount` (default 2, range 1 to 3) distinct events from: ignite the player and place fire at their feet, lightning at their position, one random bad effect for 15 seconds (poison, wither, blindness, nausea, slowness, weakness, hunger). Target is the player who landed the killing blow, otherwise the nearest player within 32 blocks. Nothing happens if no player is found. `deathEventsEnabled` in the config turns it off. No respawn: the player brings Verity back with the spawn egg. Triggered from `VerityEntity.die`, once per death. Provisional.
+
