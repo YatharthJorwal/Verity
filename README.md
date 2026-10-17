@@ -33,6 +33,7 @@ It does not go quietly. One random event startles and threatens a player: they a
 | `/verity mode <wander\|follow\|stay> <targets>` | Sets what Verity is doing. Example: `/verity mode stay @e[type=verity:verity]` |
 | `/verity status <targets>` | Shows each Verity's position, mode, and whether it is moving |
 | `/verity ping` | Sends a test message to Ollama and prints the reply |
+| `/verity observe <targets>` | Prints what each Verity currently perceives, as it would be shown to the model |
 
 ## Building from source
 

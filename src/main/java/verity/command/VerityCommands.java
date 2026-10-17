@@ -15,6 +15,8 @@ import net.minecraft.world.entity.Entity;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import verity.Verity;
+import verity.ai.Observation;
+import verity.ai.ObservationCollector;
 import verity.ai.OllamaClient;
 import verity.config.VerityConfig;
 import verity.entity.VerityEntity;
@@ -25,6 +27,7 @@ import verity.entity.VerityMode;
  * /verity mode (wander|follow|stay) targets
  * /verity status targets
  * /verity ping   (sends a test message to Ollama and prints the answer)
+ * /verity observe targets   (prints what each Verity currently perceives)
  * Example: /verity mode stay @e[type=verity:verity]
  */
 public class VerityCommands {
@@ -45,7 +48,10 @@ public class VerityCommands {
 					.requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_MODERATOR))
 					.then(modeNode)
 					.then(statusNode)
-					.then(Commands.literal("ping").executes(VerityCommands::ping)));
+					.then(Commands.literal("ping").executes(VerityCommands::ping))
+					.then(Commands.literal("observe")
+							.then(Commands.argument("targets", EntityArgument.entities())
+									.executes(VerityCommands::observe))));
 		});
 	}
 
@@ -71,6 +77,20 @@ public class VerityCommands {
 						+ ": mode=" + verity.getMode().id()
 						+ ", moving=" + !verity.getNavigation().isDone();
 				context.getSource().sendSuccess(() -> Component.literal(line), false);
+			}
+		}
+		return found;
+	}
+
+	private static int observe(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+		int found = 0;
+		for (Entity entity : EntityArgument.getEntities(context, "targets")) {
+			if (entity instanceof VerityEntity verity) {
+				found++;
+				Observation observation = ObservationCollector.collect(verity);
+				for (String line : observation.toPromptText().split("\n")) {
+					context.getSource().sendSuccess(() -> Component.literal(line), false);
+				}
 			}
 		}
 		return found;

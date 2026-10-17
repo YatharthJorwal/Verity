@@ -18,9 +18,10 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 | `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed, death events on/off, Ollama URL, model and timeout) with Gson at startup. Later: AI toggle |
 | `verity.entity.goal` | exists | `ModeStrollGoal` (own wander logic), `StayGoal`, `FollowPlayerGoal`. Later: goals for `walk_to` and `look_at` model actions |
 | `verity.ai.OllamaClient` | exists | Sends chat requests to Ollama on one background thread (`verity-brain`) and returns a `CompletableFuture`. Thinking off, non-streaming |
-| `verity.ai` (rest) | planned | Observation collector, prompt builder, JSON parser and action validator, action executor |
+| `verity.ai.Observation`, `ObservationCollector` | exists | Immutable snapshot of nearby players (distance, whether they look at Verity, held item), light level, weather, Verity's own mode and health. Collected on the server thread, turned into prompt text with `toPromptText()`. Time of day, recent chat and builds are not in yet |
+| `verity.ai` (rest) | planned | Prompt builder, JSON parser and action validator, action executor, the periodic loop |
 | `verity.memory` | planned | Per-world memory file and summarizer |
-| `verity.command.VerityCommands` | exists | `/verity mode <mode> <targets>`, `/verity status <targets>`, `/verity ping`. Later: kill switch and debug commands |
+| `verity.command.VerityCommands` | exists | `/verity mode <mode> <targets>`, `/verity status <targets>`, `/verity ping`, `/verity observe <targets>`. Later: kill switch and debug commands |
 
 ## Planned data flow (Phase 3)
 
