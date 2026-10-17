@@ -53,6 +53,9 @@ Verity never despawns when players are far away (`removeWhenFarAway` returns fal
 ## D-017: Own wander goal instead of subclassing vanilla's
 After bundle 006, wander stopped working while stay and follow worked. The root cause was not confirmed. `ModeStrollGoal` is now self-contained (random timing, `DefaultRandomPos`, navigation) so it no longer relies on vanilla stroll internals. `/verity status` reports mode and whether Verity is moving, to diagnose this kind of problem. Provisional.
 
-## D-018: Death events
+## D-018: Death events (superseded by D-019)
 When Verity dies, `VerityDeathEvents` picks `deathEventCount` (default 2, range 1 to 3) distinct events from: ignite the player and place fire at their feet, lightning at their position, one random bad effect for 15 seconds (poison, wither, blindness, nausea, slowness, weakness, hunger). Target is the player who landed the killing blow, otherwise the nearest player within 32 blocks. Nothing happens if no player is found. `deathEventsEnabled` in the config turns it off. No respawn: the player brings Verity back with the spawn egg. Triggered from `VerityEntity.die`, once per death. Provisional.
+
+## D-019: One death event, startle rather than kill
+Replaces D-018. On death exactly one event fires, never two. Selection is uniform among the eligible categories: ignite (5 seconds plus fire at the feet), weak lightning, temporary lava at the feet, random bad effect. The effect category picks uniformly from poison, wither, blindness, nausea, slowness, weakness, hunger, mining fatigue and darkness, with a random duration and amplifier within a per-effect range. Lightning is visual only (flash and sound, no fire) plus up to 4 damage, never taking the player below 2 health. Lava lasts 3 seconds and is then replaced with the original block, and any pending lava is restored when the server stops. Ignite needs the target at 10 or more health and lava at 14 or more; otherwise those categories are skipped for that death. Target is the killer, otherwise the nearest player within 32 blocks. The chosen event is logged. `deathEventCount` was removed from the config. Provisional.
 

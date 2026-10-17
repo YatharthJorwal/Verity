@@ -24,10 +24,8 @@ public class VerityConfig {
 
 	public double maxHealth = 10.0;
 	public double movementSpeed = 0.2;
-	/** When Verity dies, trigger events aimed at a player. */
+	/** When Verity dies, one random event is aimed at a player. */
 	public boolean deathEventsEnabled = true;
-	/** How many different events fire on death (1 to 3). */
-	public int deathEventCount = 2;
 
 	public static VerityConfig get() {
 		return instance;
@@ -69,6 +67,5 @@ public class VerityConfig {
 	private void sanitize() {
 		maxHealth = Double.isNaN(maxHealth) ? 10.0 : Math.clamp(maxHealth, 1.0, 1000.0);
 		movementSpeed = Double.isNaN(movementSpeed) ? 0.2 : Math.clamp(movementSpeed, 0.05, 1.0);
-		deathEventCount = Math.clamp(deathEventCount, 1, 3);
 	}
 }

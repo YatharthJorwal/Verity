@@ -2,7 +2,7 @@
 
 Read this first in a new session. Update it whenever it goes stale (see the checklist at the bottom).
 
-**Last updated:** 2026-10-17 (bundle 008: death events)
+**Last updated:** 2026-10-17 (bundle 010: reworked death events)
 
 ## Where we are
 
@@ -12,7 +12,7 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
   - Verified in game: wander slowly, look at the nearest player, glance around.
   - Bundle 006 adds, awaiting the user's check: `VerityMode` (WANDER, FOLLOW, STAY), `StayGoal`, `FollowPlayerGoal` (starts beyond 5 blocks, stops within 3), a mode-gated stroll goal, no-despawn, mode saved with the entity, and `/verity mode <wander|follow|stay> <targets>`.
   - Verified in game: stay, follow, wander (after the bundle 007 rewrite of the wander goal), `/verity status`.
-  - Bundle 008 adds death events (see D-018), awaiting the user's check.
+  - Death events (bundle 008) work in game. Bundle 010 reworks them (see D-019): one event per death, uniform among categories, weaker lightning, temporary lava, more effects. Awaiting the user's check.
   - Not done: nothing planned for Phase 2 beyond testing the death events.
 - Nothing from Phases 3 to 5 exists yet.
 
@@ -25,7 +25,7 @@ Read this first in a new session. Update it whenever it goes stale (see the chec
 
 ## Next step
 
-1. User merges bundle 008, builds, and tests the death events carefully: first in creative, then in survival with a backup of the world or a throwaway world. `/kill @e[type=verity:verity]` has no attacker, so it targets the nearest player. Killing it with a sword targets the attacker.
+1. User merges bundle 010, builds, and tests the death events many times in a throwaway world (`/kill @e[type=verity:verity]` targets the nearest player; the log line `Verity death event: <name>` says which event fired). Check that lava disappears after about 3 seconds and that lightning does not kill.
 2. Phase 3, starting with the Ollama client on a background thread, before any model output touches the game. First confirm Ollama can run the chosen model with thinking off.
 
 ## Open questions

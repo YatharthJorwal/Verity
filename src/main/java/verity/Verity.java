@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import verity.command.VerityCommands;
 import verity.config.VerityConfig;
+import verity.event.TemporaryBlocks;
 
 public class Verity implements ModInitializer {
 	public static final String MOD_ID = "verity";
@@ -29,6 +30,7 @@ public class Verity implements ModInitializer {
 		ModEntities.init();
 		ModItems.init();
 		VerityCommands.register();
+		TemporaryBlocks.init();
 	}
 
 	public static Identifier id(String path) {

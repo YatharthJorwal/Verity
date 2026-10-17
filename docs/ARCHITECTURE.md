@@ -9,12 +9,13 @@ Status markers: **[exists]** is in the repo now, **[planned]** is not written ye
 | `verity.Verity` | exists | Mod entrypoint. Holds `MOD_ID`, logger, `id(path)` helper. Calls `ModEntities.init()` |
 | `verity.ModEntities` | exists | Registers the `verity:verity` entity type and its default attributes |
 | `verity.entity.VerityEntity` | exists | The mob. Extends `PathfinderMob`. Holds the current `VerityMode`, never despawns, saves its mode. Goal priority: float, stay, follow, stroll, look at player, look around |
-| `verity.event.VerityDeathEvents` | exists | On death, picks random events (ignite and fire block, lightning, random bad effect) and applies them to the killer or the nearest player |
+| `verity.event.VerityDeathEvents` | exists | On death, picks exactly one random event (ignite, weak lightning, temporary lava, random bad effect) and applies it to the killer or the nearest player. Risky events are skipped at low health |
+| `verity.event.TemporaryBlocks` | exists | Places a block briefly and restores the original, including on server stop |
 | `verity.entity.VerityMode` | exists | WANDER, FOLLOW, STAY. Goals check it. Later, validated model actions set it |
 | `verity.client.VerityClient` | exists | Client entrypoint. Registers the model layer and the entity renderer |
 | `verity.client.VerityModel`, `VerityModelLayers`, `VerityRenderer` | exists | 8x8x8 cube model (32x16 texture, pivots at its center and follows head pitch and yaw), model layer registration, `MobRenderer` using vanilla `LivingEntityRenderState` |
 | `verity.ModItems` | exists | Registers the spawn egg and adds it to the Spawn Eggs creative tab |
-| `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed, death events on/off and count) with Gson at startup. Later: AI toggle |
+| `verity.config.VerityConfig` | exists | Loads `config/verity.json` (max health, movement speed, death events on/off) with Gson at startup. Later: AI toggle |
 | `verity.entity.goal` | exists | `ModeStrollGoal` (own wander logic), `StayGoal`, `FollowPlayerGoal`. Later: goals for `walk_to` and `look_at` model actions |
 | `verity.ai` | planned | Observation collector, Ollama HTTP client, prompt builder, JSON parser and action validator, action executor |
 | `verity.memory` | planned | Per-world memory file and summarizer |
